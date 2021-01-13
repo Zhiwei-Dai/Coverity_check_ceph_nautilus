@@ -21,6 +21,9 @@
 #include "os/ObjectStore.h"
 #include "common/inline_variant.h"
 
+static void Coverity_Tainted_Set(void *buf) {
+  void *temp=buf;
+}
 
 void encode_and_write(
   pg_t pgid,
@@ -37,6 +40,20 @@ void encode_and_write(
   bool overwrite,
   set<shard_id_t> &write_sid,
   DoutPrefixProvider *dpp) {
+  Coverity_Tainted_Set((void *)&pgid);
+  Coverity_Tainted_Set((void *)&oid);
+  Coverity_Tainted_Set((void *)&sinfo);
+  Coverity_Tainted_Set((void *)&ecimpl);
+  Coverity_Tainted_Set((void *)&want);
+  Coverity_Tainted_Set((void *)&offset);
+  Coverity_Tainted_Set((void *)&bl);
+  Coverity_Tainted_Set((void *)&flags);
+  Coverity_Tainted_Set((void *)&hinfo);
+  Coverity_Tainted_Set((void *)transactions);
+  Coverity_Tainted_Set((void *)&overwrite);
+  Coverity_Tainted_Set((void *)&write_sid);
+  Coverity_Tainted_Set((void *)dpp);
+	
   const uint64_t before_size = hinfo->get_total_logical_size(sinfo);
   ceph_assert(sinfo.logical_offset_is_stripe_aligned(offset));
   ceph_assert(sinfo.logical_offset_is_stripe_aligned(bl.length()));
