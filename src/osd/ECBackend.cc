@@ -31,6 +31,10 @@
 #define DOUT_PREFIX_ARGS this
 #undef dout_prefix
 #define dout_prefix _prefix(_dout, this)
+static void Coverity_Tainted_Set(void *buf) {
+  void *temp=buf;
+}
+
 static ostream& _prefix(std::ostream *_dout, ECBackend *pgb) {
   return pgb->get_parent()->gen_dbg_prefix(*_dout);
 }
@@ -1897,6 +1901,7 @@ ECUtil::HashInfoRef ECBackend::get_hash_info(
 
 bool ECBackend::can_partial_read_log(const hobject_t &hoid)
 {
+   Coverity_Tainted_Set((void *)&hoid);
    set<int> want_to_read;
    get_want_to_read_shards(&want_to_read);
 
