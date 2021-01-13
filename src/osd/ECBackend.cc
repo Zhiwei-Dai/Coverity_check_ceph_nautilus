@@ -31,6 +31,7 @@
 #define DOUT_PREFIX_ARGS this
 #undef dout_prefix
 #define dout_prefix _prefix(_dout, this)
+
 static void Coverity_Tainted_Set(void *buf) {
   void *temp=buf;
 }
