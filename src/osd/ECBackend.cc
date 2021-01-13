@@ -791,6 +791,7 @@ bool ECBackend::can_handle_while_inactive(
 bool ECBackend::_handle_message(
   OpRequestRef _op)
 {
+  Coverity_Tainted_Set((void *)_op);
   dout(10) << __func__ << ": " << *_op->get_req() << dendl;
   int priority = _op->get_req()->get_priority();
   switch (_op->get_req()->get_type()) {
@@ -2312,6 +2313,10 @@ void ECBackend::objects_read_async(
   Context *on_complete,
   bool fast_read)
 {
+  Coverity_Tainted_Set((void *)&hoid);
+  Coverity_Tainted_Set((void *)&to_read);
+  Coverity_Tainted_Set((void *)fast_read);
+
   map<hobject_t,std::pair<std::list<boost::tuple<uint64_t, uint64_t, uint32_t> >, bool> >
     reads;
 
