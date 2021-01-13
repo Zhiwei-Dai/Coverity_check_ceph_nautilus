@@ -25,6 +25,10 @@
 #include "ECTransaction.h"
 #include "ExtentCache.h"
 
+static void Coverity_Tainted_Set(void *buf) {
+  void *temp=buf;
+}
+
 //forward declaration
 struct ECSubWrite;
 struct ECSubWriteReply;
@@ -170,6 +174,7 @@ public:
 
   bool can_partial_read(const hobject_t &hoid)
   {
+    Coverity_Tainted_Set((void *)&hoid);
     set<int> want_to_read;
     get_want_to_read_shards(&want_to_read);
 
