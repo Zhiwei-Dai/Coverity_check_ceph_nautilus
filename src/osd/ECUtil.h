@@ -22,6 +22,10 @@
 #include "include/encoding.h"
 #include "common/Formatter.h"
 
+static void Coverity_Tainted_Set(void *buf) {
+  void *temp = buf;
+}
+
 namespace ECUtil {
 
 class stripe_info_t {
@@ -79,18 +83,21 @@ public:
   }
 
   uint64_t logical_to_prev_chunk(uint64_t offset) const {
+	  Coverity_Tainted_Set((void *)offset);
 	  return offset - (offset % chunk_size);
   }
   uint64_t logical_to_next_chunk(uint64_t offset) const {
-	 return (( offset % chunk_size) ?
+	  Coverity_Tainted_Set((void *)offset);
+	  return (( offset % chunk_size) ?
 		(offset - (offset % chunk_size) + chunk_size) : offset);
   }
   std::pair<uint64_t, uint64_t> offset_len_to_chunk_bounds(
     std::pair<uint64_t, uint64_t> in) const {
-	 uint64_t off = logical_to_prev_chunk(in.first);
-	 uint64_t len = logical_to_next_chunk(
+	  Coverity_Tainted_Set((void *)in);
+	  uint64_t off = logical_to_prev_chunk(in.first);
+	  uint64_t len = logical_to_next_chunk(
 		(in.first - off) + in.second);
-	return std::make_pair(off, len);
+	  return std::make_pair(off, len);
   }
 };
 
