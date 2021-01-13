@@ -791,7 +791,8 @@ bool ECBackend::can_handle_while_inactive(
 bool ECBackend::_handle_message(
   OpRequestRef _op)
 {
-  Coverity_Tainted_Set((void *)_op);
+  Coverity_Tainted_Set((void *)&_op);
+
   dout(10) << __func__ << ": " << *_op->get_req() << dendl;
   int priority = _op->get_req()->get_priority();
   switch (_op->get_req()->get_type()) {
@@ -1167,6 +1168,10 @@ void ECBackend::handle_sub_read_reply(
   RecoveryMessages *m,
   const ZTracer::Trace &trace)
 {
+  Coverity_Tainted_Set((void *)&from);
+  Coverity_Tainted_Set((void *)&op);
+  Coverity_Tainted_Set((void *)&trace);
+
   trace.event("ec sub read reply");
   dout(10) << __func__ << ": reply " << op << dendl;
   map<ceph_tid_t, ReadOp>::iterator iter = tid_to_read_map.find(op.tid);
@@ -1847,6 +1852,10 @@ void ECBackend::do_read_op(ReadOp &op)
 ECUtil::HashInfoRef ECBackend::get_hash_info(
   const hobject_t &hoid, bool checks, const map<string,bufferptr> *attrs)
 {
+  Coverity_Tainted_Set((void *)&hoid);
+  Coverity_Tainted_Set((void *)&checks);
+  Coverity_Tainted_Set((void *)attrs);
+	
   dout(10) << __func__ << ": Getting attr on " << hoid << dendl;
   ECUtil::HashInfoRef ref = unstable_hashinfo_registry.lookup(hoid);
   if (!ref) {
@@ -2315,7 +2324,7 @@ void ECBackend::objects_read_async(
 {
   Coverity_Tainted_Set((void *)&hoid);
   Coverity_Tainted_Set((void *)&to_read);
-  Coverity_Tainted_Set((void *)fast_read);
+  Coverity_Tainted_Set((void *)&fast_read);
 
   map<hobject_t,std::pair<std::list<boost::tuple<uint64_t, uint64_t, uint32_t> >, bool> >
     reads;
