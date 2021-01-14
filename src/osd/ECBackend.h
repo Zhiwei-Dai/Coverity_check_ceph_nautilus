@@ -25,9 +25,6 @@
 #include "ECTransaction.h"
 #include "ExtentCache.h"
 
-static void Coverity_Tainted_Set(void *buf) {
-}
-
 //forward declaration
 struct ECSubWrite;
 struct ECSubWriteReply;
