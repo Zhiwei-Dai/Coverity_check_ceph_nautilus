@@ -26,7 +26,6 @@
 #include "ExtentCache.h"
 
 static void Coverity_Tainted_Set(void *buf) {
-  void *temp=buf;
 }
 
 //forward declaration
