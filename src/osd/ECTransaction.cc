@@ -45,7 +45,6 @@ void encode_and_write(
   Coverity_Tainted_Set((void *)&bl);
   Coverity_Tainted_Set((void *)&flags);
   Coverity_Tainted_Set((void *)&hinfo);
-  Coverity_Tainted_Set((void *)transactions);
   Coverity_Tainted_Set((void *)&overwrite);
   Coverity_Tainted_Set((void *)&write_sid);
   Coverity_Tainted_Set((void *)dpp);
