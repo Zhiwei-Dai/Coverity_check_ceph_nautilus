@@ -14,14 +14,14 @@ bool HiSetWriteSection( const uint64_t offset, const uint64_t len, const uint64_
 bool HiRebuildToread( const map<uint64_t, uint64_t> &writeSet, uint64_t csize,
 		map<uint64_t, uint64_t> &toRead);
 
-struct HiECInfo {
+struct HiEcInfo {
 	size_t dataCnt;
 	size_t chunkCnt;
 	const vector<int> &cMapping;
 	uint64_t cSize;
 	uint64_t sWidth;
 
-	HiECInfo(size_t k,size_t km, const vector<int> &chunkMapping,uint64_t chunkSize,
+	HiEcInfo(size_t k,size_t km, const vector<int> &chunkMapping,uint64_t chunkSize,
 			uint64_t stripeWidth)
 		: dataCnt(k),
 		  chunkCnt(km),
@@ -31,21 +31,21 @@ struct HiECInfo {
 };
 
 void HiGetRelatedShards(const pair<uint64_t,uint64_t> &rRange,
-			const HiECInfo &ecInfo, set<int> &out);
+			const HiEcInfo &ecInfo, set<int> &out);
 
 void HiGetShardsRangeToRead(const pair<uint64_t,uint64_t> &rRange,
-			const HiECInfo &ecInfo,
+			const HiEcInfo &ecInfo,
 			map<int , set<pair<uint64_t, uint64_t>>> &wants);
 
 void HiGetWriteToShards(const map<uint64_t,uint64_t> &toWriteChunkAlign,
-			const HiECInfo &ecInfo ,set<int> &wantToWrite);
+			const HiEcInfo &ecInfo ,set<int> &wantToWrite);
 
 void HiGetReconstructShards(const unsigned int start,const unsigned int count,
-			const uint64_t len, const HiECInfo &ecInfo,
+			const uint64_t len, const HiEcInfo &ecInfo,
 			vector<int> &shardID);
 
 void HiReconstructPrepare(
-		const HiECInfo &ecInfo, const pair<uint64_t,uint64_t> &rRange,
+		const HiEcInfo &ecInfo, const pair<uint64_t,uint64_t> &rRange,
 		vector<boost::tuple<unsigned int , unsigned int , unsigned int>> &cInfo);
 
 #endif
