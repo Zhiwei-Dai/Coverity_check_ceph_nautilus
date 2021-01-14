@@ -21,10 +21,6 @@
 #include "os/ObjectStore.h"
 #include "common/inline_variant.h"
 
-static void Coverity_Tainted_Set(void *buf) {
-  void *temp=buf;
-}
-
 void encode_and_write(
   pg_t pgid,
   const hobject_t &oid,
