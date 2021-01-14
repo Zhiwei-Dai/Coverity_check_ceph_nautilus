@@ -175,6 +175,7 @@ public:
   bool can_partial_read(const hobject_t &hoid)
   {
     Coverity_Tainted_Set((void *)&hoid);
+	  
     set<int> want_to_read;
     get_want_to_read_shards(&want_to_read);
 
@@ -205,6 +206,8 @@ public:
   void objects_read_async_no_cache(
     const list<boost::tuple<hobject_t, extent_set, bool>> &remote_read_ext,
     Func &&on_complete) {
+    Coverity_Tainted_Set((void *)&remote_read_ext);
+	  
     std::map<hobject_t, std::pair<std::list<boost::tuple<uint64_t, uint64_t, uint32_t> >, bool >  > _to_read;
     for (auto &&hpair: remote_read_ext) {
       auto &l = _to_read[hpair.get<0>()];
