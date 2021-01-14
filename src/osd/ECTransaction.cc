@@ -128,6 +128,17 @@ void ECTransaction::generate_transactions(
   DoutPrefixProvider *dpp,
   bool &have_append)
 {
+  Coverity_Tainted_Set((void *)&plan);
+  Coverity_Tainted_Set((void *)&ecimpl);
+  Coverity_Tainted_Set((void *)&pgid);
+  Coverity_Tainted_Set((void *)&sinfo);
+  Coverity_Tainted_Set((void *)&partial_extents);
+  Coverity_Tainted_Set((void *)&entries);
+  Coverity_Tainted_Set((void *)written_map);
+  Coverity_Tainted_Set((void *)&write_sid);
+  Coverity_Tainted_Set((void *)dpp);
+  Coverity_Tainted_Set((void *)&have_append);
+	
   ceph_assert(written_map);
   ceph_assert(transactions);
   ceph_assert(temp_added);
