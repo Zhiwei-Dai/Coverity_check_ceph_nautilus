@@ -1208,7 +1208,7 @@ void ECBackend::handle_sub_read_reply(
        while (req_iter != rop.to_read.find(i->first)->second.to_read.end()){
 	       set<int> shards;
 
-	       HiECInfo ec_info (ec_impl->get_data_chunk_count(),ec_impl->get_chunk_count(),
+	       HiEcInfo ec_info (ec_impl->get_data_chunk_count(),ec_impl->get_chunk_count(),
 			         ec_impl->get_chunk_mapping(), sinfo.get_chunk_size(),
 				 sinfo.get_stripe_width());
 	       HiGetRelatedShards(make_pair(req_iter->get<0>(), req_iter->get<1>()), ec_info, shards);
@@ -1756,7 +1756,7 @@ void ECBackend::do_read_op(ReadOp &op)
 	  dout(20) << __func__ << ": second.partial_read="<< i->second.partial_read << dendl;
 	  if (i->second.partial_read) {
 		  map<int, set<pair<uint64_t, uint64_t>>> wants_tmp;
-		  HiECInfo ec_info(ec_impl->get_data_chunk_count(),ec_impl->get_chunk_count(),
+		  HiEcInfo ec_info(ec_impl->get_data_chunk_count(),ec_impl->get_chunk_count(),
 				   ec_impl->get_chunk_mapping(), sinfo.get_chunk_size(),
 				  sinfo.get_stripe_width());
 		  HiGetShardsRangeToRead(make_pair(j->get<0>(), j->get<1>()), ec_info , wants_tmp);
@@ -2083,7 +2083,7 @@ bool ECBackend::try_reads_to_commit()
   bool have_append = false;
   if (op->plan.t) {
   
-  HiECInfo ec_info(ec_impl->get_data_chunk_count(), ec_impl->get_chunk_count(),
+  HiEcInfo ec_info(ec_impl->get_data_chunk_count(), ec_impl->get_chunk_count(),
 		   ec_impl->get_chunk_mapping(), sinfo.get_chunk_size(),
 		   sinfo.get_stripe_width());
     set<int> want_to_read;
@@ -2467,7 +2467,7 @@ struct CallClientContexts :
 
     vector<int> chunk_idx;
 
-    HiECInfo ec_info(ec->ec_impl->get_data_chunk_count(), ec->ec_impl->get_chunk_count(),
+    HiEcInfo ec_info(ec->ec_impl->get_data_chunk_count(), ec->ec_impl->get_chunk_count(),
 		     ec->ec_impl->get_chunk_mapping(), ec->sinfo.get_chunk_size(),
 		     ec->sinfo.get_stripe_width());
     HiGetReconstructShards(start, count,len, ec_info, chunk_idx);
@@ -2483,7 +2483,7 @@ struct CallClientContexts :
 	  auto dpp=ec->get_parent()->get_dpp();
 	  ldpp_dout(dpp, 20) << " in: " << in <<dendl;
 
-	  HiECInfo ec_info(ec->ec_impl->get_data_chunk_count(),ec->ec_impl->get_chunk_count(),
+	  HiEcInfo ec_info(ec->ec_impl->get_data_chunk_count(),ec->ec_impl->get_chunk_count(),
 			   ec->ec_impl->get_chunk_mapping(),ec->sinfo.get_chunk_size(),
 			   ec->sinfo.get_stripe_width());
 
