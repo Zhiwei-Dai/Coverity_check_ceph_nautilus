@@ -32,10 +32,6 @@
 #undef dout_prefix
 #define dout_prefix _prefix(_dout, this)
 
-static void Coverity_Tainted_Set(void *buf) {
-  void *temp=buf;
-}
-
 static ostream& _prefix(std::ostream *_dout, ECBackend *pgb) {
   return pgb->get_parent()->gen_dbg_prefix(*_dout);
 }
