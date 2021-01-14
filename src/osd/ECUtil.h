@@ -23,7 +23,6 @@
 #include "common/Formatter.h"
 
 static void Coverity_Tainted_Set(void *buf) {
-  void *temp = buf;
 }
 
 namespace ECUtil {
